@@ -3,20 +3,22 @@ import './Banner.css';
 import axios from 'axios';
 
 const Banner = () => {
-    const [output, setOutput] = useState('');
+    const [output, setOutput] = useState(``);
     const [inputVal, setInputVal] = useState('');
-    const [loading, setLoading] = useState(false);
+
+    // const outputData = output.replace(/(\d+\.)/g, '\n$1');
 
     const outputBG = output ? 'bg-slate-200' : '';
 
-    if (loading) {
-        return <h1>Loading...</h1>
-    }
-
     const handleTestAi = (value: string) => {
         if (inputVal) {
+            // http://localhost:3100/test-ai?
+            // https://crack-ai-server-lovat.vercel.app/test-ai
             axios.get(`https://crack-ai-server-lovat.vercel.app/test-ai?prompt=${value}`)
-                .then(data => setOutput(data.data))   
+                .then(data => {
+                    const testData = data.data;
+                    setOutput(testData);
+                })
         }
     }
 
@@ -34,7 +36,7 @@ const Banner = () => {
                     <button onClick={() => handleTestAi(inputVal)} className='btn bg-teal-600 rounded-xl text-xl border border-slate-300'>Search</button>
                 </div>
                 <div className={`${outputBG} p-3 w-10/12 max-h-[240px] overflow-auto border-t-2 rounded-md border-teal-200 mx-auto text-black`}>
-                    {output ? output : <p className='text-center'>Search any query using Flash Writer.</p>}
+                    {output ? <p>{output}</p> : <p className='text-center'>Search any query using Flash Writer.</p>}
                 </div>
             </div>
         </div>
