@@ -1,6 +1,5 @@
 import { Welcome } from "~/welcome/welcome";
 
-
 const react = () => {
     return (
         <div>
