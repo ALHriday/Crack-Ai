@@ -2,7 +2,7 @@
 import Banner from "components/Banner/Banner";
 import type { Route } from "./+types/home";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Crack-Ai" },
     { name: "description", content: "Welcome to React Router!" },
@@ -10,7 +10,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <>
-  <Banner></Banner>
-  </>;
+  return (
+    <div>
+      <Banner></Banner>
+    </div>
+  )
 }

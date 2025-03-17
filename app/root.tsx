@@ -36,11 +36,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Navbar></Navbar>
+        <div>
+          <Navbar></Navbar>
+        </div>
         <div className="min-h-screen">
           {children}
         </div>
-        <Footer></Footer>
+        <div>
+          <Footer></Footer>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>

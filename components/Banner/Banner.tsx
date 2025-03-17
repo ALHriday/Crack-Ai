@@ -1,25 +1,25 @@
 'use client'
+// 'use server'
+
 import { useState } from 'react';
 import './Banner.css';
 import axios from 'axios';
 
 const Banner = () => {
-    const [output, setOutput] = useState(``);
+    const [output, setOutput] = useState('');
     const [inputVal, setInputVal] = useState('');
 
     // const outputData = output.replace(/(\d+\.)/g, '\n$1');
 
     const outputBG = output ? 'bg-slate-200' : '';
 
-    const handleTestAi = (value: string) => {
+    const handleTestAi = async (value: string) => {
         if (inputVal) {
+            const data = await axios.get(`https://crack-ai-server-lovat.vercel.app/test-ai?prompt=${value}`)
+            setOutput(data.data);
+            
             // http://localhost:3100/test-ai?
             // https://crack-ai-server-lovat.vercel.app/test-ai
-            axios.get(`https://crack-ai-server-lovat.vercel.app/test-ai?prompt=${value}`)
-                .then(data => {
-                    const testData = data.data;
-                    setOutput(testData);
-                })
         }
     }
 
@@ -32,6 +32,7 @@ const Banner = () => {
                 <div className='flex gap-2 justify-center items-center'>
                     <input
                         onChange={(e) => setInputVal(e.target.value)}
+                        name=''
                         className='p-2 bg-slate-200 outline-2 outline-teal-400 focus:bg-slate-100 border-2 text-black border-teal-500 rounded-xl shadow-md'
                         type="text" />
                     <button onClick={() => handleTestAi(inputVal)} className='btn bg-teal-600 rounded-xl text-xl border border-slate-300'>Search</button>
